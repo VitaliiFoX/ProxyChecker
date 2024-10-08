@@ -1,8 +1,14 @@
-# It's a short for using this script
+# It's a short guide for using this script
 
 # Getting started✅
 - Download the script from github;
+```bash
+git clone https://github.com/VitaliiFoX/ProxyChecker.git
+```
 - Install libraries from requirements.txt;
+```bash
+pip install -r requirements.txt
+```
 - Register on ip2location website and get API from it;
 - Use it for yourself :)
 
