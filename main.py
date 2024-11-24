@@ -11,15 +11,20 @@ def check_proxy(proxy_id, current_proxy):             # Proxy must be proxy_type
         'https': f'{current_proxy}'
     }
 
-    data = requests.get('https://whoer.net/en/main/api/ip', proxies=proxies).json()['data']
-    ip = data['ip']
+    # data = requests.get('https://whoer.net/en/main/api/ip', proxies=proxies).json()['data']
+    # ip = data['ip']
+
+    data = requests.get('https://ip-score.com/json', proxies=proxies).json()
+    # print(data)
+    ip = current_proxy.split('@')[1].split(':')[0]
 
     request_params = {
         'key': IP2_LOCATION_API,
         'ip': ip
     }
     ip2location_data = requests.get('https://api.ip2location.io', proxies=proxies, params=request_params).json()
-    proxy_geo = f"{data['iso']}_{ip2location_data['country_code']}"
+    # proxy_geo = f"{data['iso']}_{ip2location_data['country_code']}"
+    proxy_geo = f"{data['geoip1']['countrycode']}_{data['geoip2']['countrycode']}_{ip2location_data['country_code']}"
     print(f"Checked {proxy_id + 1}/{total_proxies} proxy... The status of {proxy} is {proxy_geo}")
     return proxy_geo
 
